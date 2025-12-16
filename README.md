@@ -1,5 +1,6 @@
-## Apache Flink with JDBC based Catalog, backec by Postgres
+## Apache Iceberg and apache Paimon Tables feeding Apache Flink with JDBC based Catalog implimentation, back'd by Postgres for persistence
 
+... <ADD>
 
 
 ### Now back to our scheduled programming:  ;)
@@ -25,6 +26,7 @@ The output of these processing step are records insert into a Lakehouse tables, 
 
 - Apache Hudi
 
+- ...
 
 Now, a phone book, ye I'm old enough to know what thye looked like was useless without the index at the back. That index was a sort of catalog of the records contained in the book, 
 
@@ -34,28 +36,14 @@ And thats what a catalog does for us, it keeps track of our tables, their struct
 
 All this allows one user to create tables inside a database in one session and makes this available to another user in a different session to access that table and the contents, using the processing engine of choice.
 
-In the past, I use to use [Hive Metastore (HMS)](https://hive.apache.org)/see Central Metastore Catalog. But lets see, I like rabit holes so decided to mix things up a bit, or was that I wanted to simplify the stack (HMS is tech heavy), and here we are, lets introduce Apache Polaris (incubating) and it's REST interface as Catalog service for our Apache Iceberg based Lakehouse.
+In the past, I use to use [Hive Metastore (HMS)](https://hive.apache.org)/see Central Metastore Catalog. 
 
-Some background [Apache Polaris (incubating)](https://polaris.apache.org) is an open source project donated to the community by [Snowflake](http://snowflake.com):
+But lets see, I like rabit holes so decided to mix things up a bit, or was that I wanted to simplify the stack (HMS is tech heavy), and here we are, lets try and use an JDBC based Catalog with PostgreSQL providing persistence for our Apache Iceberg and apache Paimon Open Table format Lakehouse Tables.
 
-[Apache Polaris (incubating)](https://polaris.apache.org) was initially created by engineers at [Snowflake](http://snowflake.com), who open-sourced the technology in June 2024 and contributed it to the Apache Software Foundation for incubation. [Dremio](https://www.dremio.com) was an original co-creator and has been a leading contributor to the project since its inception. 
-
-The project is now a community-driven open-source initiative under the Apache Software Foundation, with contributions from a diverse group of companies including AWS, Google Cloud, Azure, Stripe, IBM, and others. 
-
-Key individuals involved in writing and authoring guides on Apache Polaris include:
-
-- Alex Merced (Head of Developer Relations at Dremio), a primary author of the O'Reilly book Apache Polaris: The Definitive Guide.
-
-- Andrew Madson and Tomer Shiran (Founder and Chief Product Officer of Dremio) are also listed as co-authors of the definitive guide. 
-
-
-As per previous, [Apache Polaris (incubating)](https://polaris.apache.org) is primarily an [Apache Iceberg](https://iceberg.apache.org) table format catalog, but does offer `Generic Table` functionality, enabling it to store metadata for tables other than Apache Iceberg, see: [What is a Generic Table?](https://polaris.apache.org/releases/1.2.0/generic-table/#what-is-a-generic-table).
-
-Also critical is catalog persistence. [Apache Polaris (incubating)](https://polaris.apache.org) just happens to natively include every to interface with PostgreSQL.
 
 BLOG: []()
 
-GIT REPO: [Polaris_Pg_Flink](https://github.com/georgelza/Polaris_pg_flink)
+GIT REPO: [[Open Table Formats (Apache Iceberg and Apache Paimon) with JDBC based Catalog backed by PostgreSQL for Persistence](https://github.com/georgelza/OTF_with-JDBC_Based_Catalog_and_PostgreSQL_persistence.git)
 
 
 ## About our Stack:
@@ -64,7 +52,7 @@ GIT REPO: [Polaris_Pg_Flink](https://github.com/georgelza/Polaris_pg_flink)
 
 The stack goes through 3 phases, if we can call it that:
 
-- Build the minimum environment to get our [Apache Polaris (incubating)](https://polaris.apache.org) catalog up, with the PostgreSQL backend datastore and MinIO configured/integrated.
+- ...
 
 - Add to this minimul stack our [Apache Flink 1.20.1](https://flink.apache.org) cluster, enabling us to define our catalog, create a Flink database and create tables inside our database homed inside our catalog.
 
@@ -100,16 +88,15 @@ or
 ### 2. via infrastructure ...
 
 -  `cd infrastructure`
--  `make pull_base`
 -  `make pull`
 -  `make build`
 
-At this point we can startup the minimum environment to make sure our Polaris/Postgres and MinIO is working, or the full stack which adds the Apache Flink cluster.
+At this point we can startup the minimum environment to make sure our Postgres and MinIO is working, or the full stack which adds the Apache Flink cluster.
 
 
 ## Run the Stack
 
-1. Minimal Environment (Polaris, Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose-basic.yml`
+1. Minimal Environment (Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose.yml`
 
    - `make run_base`
 
@@ -118,19 +105,22 @@ At this point we can startup the minimum environment to make sure our Polaris/Po
    - `make down`
   
 
-2. Full Environment (Polaris, Flink, Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose-flink.yml`
+2. Full Environment (Flink, Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose.yml`
 
    - `make run`
 
    - ... run shadowtraffic, 
-   - Execute Flink SQL to move the data from the CDC source tables into our apache Iceberg tables configured with persistent storage on our MinIO object storage service, aka S3 service.
+
+   - Execute Flink SQL to move the data from the CDC source tables into our Apache Iceberg tables configured with persistent storage on our MinIO object storage service, aka S3 service.
+
+   - Execute Flink SQL to move the data from the CDC source tables into our Apache Paimon tables configured with persistent storage on our MinIO object storage service, aka S3 service.
 
    - `make down`
 
 
 ### Notess
 
-During the startup cycle of our PostgreSQL datastore's, they will go through their standard bootstrap process which happens to include creating a database. If you want to create some personal bits, modify this process then you are able to place your desired SQL inside postgresql-init.sq which is mapped/moutned into the PostgreSQL container and run at startup.
+During the startup cycle of our PostgreSQL datastore's, they will go through their standard bootstrap process which happens to include creating a database. If you want to create some personal bits, modify this process then you are able to place your desired SQL inside postgresql-init.sq which is mapped/mounted into the PostgreSQL container and run at startup.
 
 For our datastore used for Shadowtraffic, I've placed SQL in the above script to create the following 2 tables, they will be used as target tables for ShadowTraffic and also be our source tables for Apache Flink CDC (note, I could have opted to simply have ShadowTraffic create these tables itself, but I like to do things more in line with how things happen in a production realm). For now these tables are located in a database called `demog` inside the `public` schema.
 
@@ -141,8 +131,6 @@ For our datastore used for Shadowtraffic, I've placed SQL in the above script to
 
 ### Management interfaces
 
-- Polaris: http://localhost:8181 (Client API)
-- Polaris: http://localhost:8181 (Management API)
 - Flink UI: http://localhost:8084 (Console)
 - MinIO API: http://localhost:9000 (Client API)
 - MinIO UI: http://localhost:9001 (Console, mnadmin/mnpassword)
@@ -150,9 +138,8 @@ For our datastore used for Shadowtraffic, I've placed SQL in the above script to
 
 ## Software/package versions
 
-The following stack is deployed using one of the provided  `<Project Root>/devlab/docker-compose-*.yaml` files as per above.
+The following stack is deployed using one of the provided  `<Project Root>/devlab/docker-compose.yaml` files as per above.
 
-- [Apache Polaris 1.2.0 (incubating)](https://polaris.apache.org)
 
 - [Apache Flink 1.20.1](https://flink.apache.org)                   
 

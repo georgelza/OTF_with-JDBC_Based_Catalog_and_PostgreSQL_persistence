@@ -6,8 +6,7 @@ define HELP
 
 Available commands:
 
-- build: Build required Docker images (Flink with CDC)
-
+- build: 		Build required Docker images (Flink with CDC and all the JAR's required)
 - run:   		Start All services (Flink, PostgreSQL & Minio)
 
 - stop:  		Stop the project
@@ -37,7 +36,7 @@ build:
 
 run:
 	@echo "🚀 Starting All services (Flink, PostgreSQL & MinIO)..."
-	docker compose -f docker-compose-flink.yml -p jdbccat up -d \
+	docker compose -f docker-compose.yml -p jdbccat up -d \
 		jobmanager taskmanager \
  		postgrescat postgrescdc \
 		minio minio-client \
