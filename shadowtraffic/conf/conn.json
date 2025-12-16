@@ -1,0 +1,15 @@
+{
+    "pg": {
+        "kind": "postgres",
+//        "tablePolicy": "create",
+//        "tablePolicy": "dropAndCreate",
+        "tablePolicy": "manual",
+        "connectionConfigs": {
+            "host": "localhost",
+            "port": 5433,
+            "db": "demog",
+            "username": "dbadmin",
+            "password": "dbpassword"
+        }
+    }
+}

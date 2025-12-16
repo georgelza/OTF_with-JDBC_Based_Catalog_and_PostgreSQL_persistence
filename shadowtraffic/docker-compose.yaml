@@ -1,0 +1,33 @@
+
+
+configs:
+  postgres_conf:
+    file: conf/postgresql.conf
+  postgres_hba:
+    file: conf/pg_hba.conf
+
+# watch 'docker exec shadowtraffic curl -s localhost:9400/metrics |grep events_sent'
+services:
+
+  postgres:
+    image: postgres:12
+    container_name: postgrescdc
+    hostname: postgrescdc
+    restart: unless-stopped
+    ports:
+      - ${POSTGRES_CDC_PORT}:5432
+    environment:
+      - POSTGRES_DB=${POSTGRES_CDC_DB}
+      - POSTGRES_USER=${POSTGRES_CDC_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_CDC_PASSWORD}
+      - POSTGRES_ROOT_PASSWORD=${POSTGRES_CDC_ROOT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "psql", "-U", "${POSTGRES_CDC_USER}", "${POSTGRES_CDC_DB}"]
+    volumes:
+      - ./data/${POSTGRES_CDC_HOST}:/var/lib/postgresql/data
+    configs:
+      - source: postgres_conf
+        target: /etc/postgresql/postgresql.conf
+      - source: postgres_hba
+        target: /etc/postgresql/data/pg_hba.conf
+    command: -c config_file=/etc/postgresql/postgresql.conf

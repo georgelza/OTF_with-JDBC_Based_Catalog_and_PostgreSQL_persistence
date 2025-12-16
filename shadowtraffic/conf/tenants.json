@@ -1,0 +1,741 @@
+{
+    "_gen": "weightedOneOf",
+    "choices": 
+    [
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Access Bank",
+                "displayName": "ACCESS BANK (SOUTH AFRICA) LTD",
+                "tenantId": "BATHZAJJ",
+                "bicFi": "BATHZAJJ",
+                "swiftCode": "BATHZAJJ",
+                "memberNo": "210006",
+                "mnemonic": "ACC",
+                "branch_start": "410000",
+                "branch_end": "419999",
+                "sponsored_by": "210006"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Finbond",
+                "displayName": "FINBOND MUTUAL BANK",
+                "tenantId": "FBMBZAJJ",
+                "bicFi": "FBMBZAJJ",
+                "swiftCode": "FBMBZAJJ",
+                "memberNo": "210055",
+                "mnemonic": "FIN",
+                "branch_start": "589000",
+                "branch_end": "589999",
+                "sponsored_by": "210055"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Sasfin",
+                "displayName": "SASFIN BANK LIMITED",
+                "tenantId": "SASFZAJJ",
+                "bicFi": "SASFZAJJ",
+                "swiftCode": "SASFZAJJ",
+                "memberNo": "210058",
+                "mnemonic": "SAS",
+                "branch_start": "683000",
+                "branch_end": "683999",
+                "sponsored_by": "210058"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "Capitec Business",
+                "displayName": "CAPITEC BUSINESS",
+                "tenantId": "CABL_CPB",
+                "bicFi": "",
+                "swiftCode": "CABL_CPB",
+                "memberNo": "210009",
+                "mnemonic": "CPB",
+                "branch_start": "450000",
+                "branch_end": "459999",
+                "sponsored_by": "210010"
+            }
+        },
+        {
+            "weight": 1,
+            "value": {
+                "memberName": "VBS Mutual Bank",
+                "displayName": "VBS MUTUAL BANK",
+                "tenantId": "VBSMZAJJ",
+                "bicFi": "VBSMZAJJ",
+                "swiftCode": "VBSMZAJJ",
+                "memberNo": "210054",
+                "mnemonic": "VBS",
+                "branch_start": "588000",
+                "branch_end": "588999",
+                "sponsored_by": "210054"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Tyme Bank",
+                "displayName": "TYME BANK LIMITED",
+                "tenantId": "CBZAZAJJ",
+                "bicFi": "CBZAZAJJ",
+                "swiftCode": "CBZAZAJJ",
+                "memberNo": "210061",
+                "mnemonic": "CBS",
+                "branch_start": "678000",
+                "branch_end": "678999",
+                "sponsored_by": "210061"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "Discovery Bank",
+                "displayName": "DISCOVERY BANK LTD",
+                "tenantId": "DISCZAJJ",
+                "bicFi": "DISCZAJJ",
+                "swiftCode": "DISCZAJJ",
+                "memberNo": "210063",
+                "mnemonic": "DSY",
+                "branch_start": "679000",
+                "branch_end": "679999",
+                "sponsored_by": "210063"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Finbond Net1",
+                "displayName": "FINBOND NET1",
+                "tenantId": "FBMB_EPE",
+                "bicFi": "",
+                "swiftCode": "FBMB_EPE",
+                "memberNo": "210065",
+                "mnemonic": "EPE",
+                "branch_start": "591000",
+                "branch_end": "591999",
+                "sponsored_by": "210055"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Bank Zero",
+                "displayName": "BANK ZERO MUTUAL BANK",
+                "tenantId": "ZERMZAJJ",
+                "bicFi": "ZERMZAJJ",
+                "swiftCode": "ZERMZAJJ",
+                "memberNo": "210064",
+                "mnemonic": "BZM",
+                "branch_start": "888000",
+                "branch_end": "888999",
+                "sponsored_by": "210064"
+            }
+        },
+        {
+            "weight": 1,
+            "value": {
+                "memberName": "SARB",
+                "displayName": "S.A. RESERVE BANK.",
+                "tenantId": "SARBZAJP",
+                "bicFi": "SARBZAJP",
+                "swiftCode": "SARBZAJP",
+                "memberNo": "210012",
+                "mnemonic": "RES",
+                "branch_start": "900000",
+                "branch_end": "999999",
+                "sponsored_by": "210012"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Postbank",
+                "displayName": "SOUTH AFRICAN POSTBANK SOC LTD",
+                "tenantId": "SBZA_POS",
+                "bicFi": "",
+                "swiftCode": "SBZA_POS",
+                "memberNo": "210013",
+                "mnemonic": "POS",
+                "branch_start": "460000",
+                "branch_end": "460999",
+                "sponsored_by": "210001"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Bank Windhoek",
+                "displayName": "BANK WINDHOEK BEPERK",
+                "tenantId": "BWLINANX",
+                "bicFi": "BWLINANX",
+                "swiftCode": "BWLINANX",
+                "memberNo": "210014",
+                "mnemonic": "WIN",
+                "branch_start": "480000",
+                "branch_end": "489999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "ABSA",
+                "displayName": "ABSA",
+                "tenantId": "ABSAZAJJ",
+                "bicFi": "ABSAZAJJ",
+                "swiftCode": "ABSAZAJJ",
+                "memberNo": "210015",
+                "mnemonic": "SAN",
+                "branch_start": "609000",
+                "branch_end": "629999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "ABSA",
+                "displayName": "ABSA .",
+                "tenantId": "ABSAZAJJ",
+                "bicFi": "ABSAZAJJ",
+                "swiftCode": "ABSAZAJJ",
+                "memberNo": "210016",
+                "mnemonic": "UBK",
+                "branch_start": "630000",
+                "branch_end": "659999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Ubank",
+                "displayName": "UBANK LTD",
+                "tenantId": "YOUBZAJJ",
+                "bicFi": "YOUBZAJJ",
+                "swiftCode": "YOUBZAJJ",
+                "memberNo": "210019",
+                "mnemonic": "TBL",
+                "branch_start": "431000",
+                "branch_end": "431999",
+                "sponsored_by": "210019"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "PERMANENT BANK",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210026",
+                "mnemonic": "PRM",
+                "branch_start": "760000",
+                "branch_end": "769999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "FBC FIDELITY BANK LTD",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210027",
+                "mnemonic": "FBC",
+                "branch_start": "780000",
+                "branch_end": "789999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Ithala",
+                "displayName": "ABSA - ITHALA",
+                "tenantId": "ABSA_ITH",
+                "bicFi": "",
+                "swiftCode": "ABSA_ITH",
+                "memberNo": "210030",
+                "mnemonic": "ITH",
+                "branch_start": "750000",
+                "branch_end": "759999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Citibank",
+                "displayName": "CITIBANK",
+                "tenantId": "CITIZAJX",
+                "bicFi": "CITIZAJX",
+                "swiftCode": "CITIZAJX",
+                "memberNo": "210033",
+                "mnemonic": "CTB",
+                "branch_start": "350000",
+                "branch_end": "350999",
+                "sponsored_by": "210033"
+            }
+        },
+        {
+            "weight": 4,
+            "value": {
+                "memberName": "Nedbank Swaziland",
+                "displayName": "NEDBANK SWAZILAND LIMITED",
+                "tenantId": "NESWSZMX",
+                "bicFi": "NESWSZMX",
+                "swiftCode": "NESWSZMX",
+                "memberNo": "210037",
+                "mnemonic": "NSL",
+                "branch_start": "360000",
+                "branch_end": "360999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "Investec",
+                "displayName": "INVESTEC BANK LIMITED",
+                "tenantId": "IVESZAJJ",
+                "bicFi": "IVESZAJJ",
+                "swiftCode": "IVESZAJJ",
+                "memberNo": "210039",
+                "mnemonic": "INV",
+                "branch_start": "580000",
+                "branch_end": "580999",
+                "sponsored_by": "210039"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Habib Overseas Bank",
+                "displayName": "HABIB OVERSEAS BANK LIMITED",
+                "tenantId": "HOBLZAJJ",
+                "bicFi": "HOBLZAJJ",
+                "swiftCode": "HOBLZAJJ",
+                "memberNo": "210022",
+                "mnemonic": "OBA",
+                "branch_start": "700000",
+                "branch_end": "709999",
+                "sponsored_by": "210022"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "HBZ Bank",
+                "displayName": "HBZ BANK LIMITED",
+                "tenantId": "HBZHZAJJ",
+                "bicFi": "HBZHZAJJ",
+                "swiftCode": "HBZHZAJJ",
+                "memberNo": "210036",
+                "mnemonic": "HBZ",
+                "branch_start": "570000",
+                "branch_end": "570999",
+                "sponsored_by": "210036"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "Standard Chartered",
+                "displayName": "STANDARD CHARTERED BANK SA",
+                "tenantId": "SCBLZAJJ",
+                "bicFi": "SCBLZAJJ",
+                "swiftCode": "SCBLZAJJ",
+                "memberNo": "210042",
+                "mnemonic": "SCB",
+                "branch_start": "730000",
+                "branch_end": "730999",
+                "sponsored_by": "210042"
+            }
+        },
+        {
+            "weight": 4,
+            "value": {
+                "memberName": "African Bank",
+                "displayName": "AFRICAN BANK LIMITED",
+                "tenantId": "AFRCZAJJ",
+                "bicFi": "AFRCZAJJ",
+                "swiftCode": "AFRCZAJJ",
+                "memberNo": "210007",
+                "mnemonic": "ABI",
+                "branch_start": "430000",
+                "branch_end": "430999",
+                "sponsored_by": "210007"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Bidvest Bank",
+                "displayName": "BIDVEST BANK LIMITED",
+                "tenantId": "BIDBZAJJ",
+                "bicFi": "BIDBZAJJ",
+                "swiftCode": "BIDBZAJJ",
+                "memberNo": "210044",
+                "mnemonic": "BDV",
+                "branch_start": "462000",
+                "branch_end": "462999",
+                "sponsored_by": "210044"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Standard Lesotho Bank",
+                "displayName": "STANDARD LESOTHO BANK LTD",
+                "tenantId": "SBICLSMX",
+                "bicFi": "SBICLSMX",
+                "swiftCode": "SBICLSMX",
+                "memberNo": "210046",
+                "mnemonic": "SBL",
+                "branch_start": "60067",
+                "branch_end": "63967",
+                "sponsored_by": "210001"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Nedbank Namibia",
+                "displayName": "NEDBANK NAMIBIA",
+                "tenantId": "NEDSNANX",
+                "bicFi": "",
+                "swiftCode": "NEDSNANX",
+                "memberNo": "210043",
+                "mnemonic": "NBN",
+                "branch_start": "461000",
+                "branch_end": "461999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Grindrod Bank",
+                "displayName": "GRINDROD BANK LIMITED",
+                "tenantId": "GRIDZAJJ",
+                "bicFi": "GRIDZAJJ",
+                "swiftCode": "GRIDZAJJ",
+                "memberNo": "210047",
+                "mnemonic": "GBL",
+                "branch_start": "584000",
+                "branch_end": "584999",
+                "sponsored_by": "210047"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Nedbank Lesotho",
+                "displayName": "NEDBANK LESOTHO LIMITED",
+                "tenantId": "NEDLLSMX",
+                "bicFi": "NEDLLSMX",
+                "swiftCode": "NEDLLSMX",
+                "memberNo": "210038",
+                "mnemonic": "NLL",
+                "branch_start": "390000",
+                "branch_end": "390999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "HSBC",
+                "displayName": "HSBC BANK",
+                "tenantId": "HSBCZAJJ",
+                "bicFi": "HSBCZAJJ",
+                "swiftCode": "HSBCZAJJ",
+                "memberNo": "210051",
+                "mnemonic": "HSB",
+                "branch_start": "587000",
+                "branch_end": "587999",
+                "sponsored_by": "210051"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Albaraka",
+                "displayName": "ALBARAKA BANK LIMITED",
+                "tenantId": "ALBRZAJJ",
+                "bicFi": "ALBRZAJJ",
+                "swiftCode": "ALBRZAJJ",
+                "memberNo": "210052",
+                "mnemonic": "ALB",
+                "branch_start": "800000",
+                "branch_end": "800999",
+                "sponsored_by": "210052"
+            }
+        },
+        {
+            "weight": 1,
+            "value": {
+                "memberName": "State Bank of India",
+                "displayName": "STATE BANK OF INDIA",
+                "tenantId": "SBINZAJJ",
+                "bicFi": "SBINZAJJ",
+                "swiftCode": "SBINZAJJ",
+                "memberNo": "210053",
+                "mnemonic": "SBI",
+                "branch_start": "801000",
+                "branch_end": "801999",
+                "sponsored_by": "210053"
+            }
+        },
+        {
+            "weight": 1,
+            "value": {
+                "memberName": "JPMorgan Chase",
+                "displayName": "J.P.MORGAN CHASE BANK N.A.",
+                "tenantId": "MGTCZAJJ",
+                "bicFi": "MGTCZAJJ",
+                "swiftCode": "MGTCZAJJ",
+                "memberNo": "210056",
+                "mnemonic": "JPM",
+                "branch_start": "432000",
+                "branch_end": "432999",
+                "sponsored_by": "210056"
+            }
+        },
+        {
+            "weight": 8,
+            "value": {
+                "memberName": "Capitec",
+                "displayName": "CAPITEC BANK LIMITED",
+                "tenantId": "CABLZAJJ",
+                "bicFi": "CABLZAJJ",
+                "swiftCode": "CABLZAJJ",
+                "memberNo": "210010",
+                "mnemonic": "CAP",
+                "branch_start": "470000",
+                "branch_end": "470999",
+                "sponsored_by": "210010"
+            }
+        },
+        {
+            "weight": 7,
+            "value": {
+                "memberName": "Standard Bank",
+                "displayName": "STANDARD BANK OF S.A. LTD.",
+                "tenantId": "SBZAZAJJ",
+                "bicFi": "SBZAZAJJ",
+                "swiftCode": "SBZAZAJJ",
+                "memberNo": "210001",
+                "mnemonic": "STA",
+                "branch_start": "0",
+                "branch_end": "60066",
+                "sponsored_by": "210001"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "NEDBANK LIMITED",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "NEDSZAJJ",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210002",
+                "mnemonic": "NED",
+                "branch_start": "100000",
+                "branch_end": "199999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 7,
+            "value": {
+                "memberName": "First National Bank",
+                "displayName": "FIRSTRAND BANK",
+                "tenantId": "FIRNZAJJ",
+                "bicFi": "FIRNZAJJ",
+                "swiftCode": "FIRNZAJJ",
+                "memberNo": "210003",
+                "mnemonic": "FRB",
+                "branch_start": "200000",
+                "branch_end": "299999",
+                "sponsored_by": "210003"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "PEOPLES BANK LTD INC. PEP BANK",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210005",
+                "mnemonic": "PEP",
+                "branch_start": "400000",
+                "branch_end": "400999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "NEDBANK LTD INCORP. BOE BANK",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210008",
+                "mnemonic": "BOE",
+                "branch_start": "440000",
+                "branch_end": "449999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 3,
+            "value": {
+                "memberName": "Standard Bank Swaziland",
+                "displayName": "STANDARD BANK SWAZILAND LTD.",
+                "tenantId": "SBICSZMX",
+                "bicFi": "SBICSZMX",
+                "swiftCode": "SBICSZMX",
+                "memberNo": "210017",
+                "mnemonic": "STB",
+                "branch_start": "660000",
+                "branch_end": "669999",
+                "sponsored_by": "210001"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "Olympus Mobile",
+                "displayName": "OLYMPUS MOBILE",
+                "tenantId": "BATH_OLM",
+                "bicFi": "",
+                "swiftCode": "BATH_OLM",
+                "memberNo": "210049",
+                "mnemonic": "OLM",
+                "branch_start": "585000",
+                "branch_end": "585999",
+                "sponsored_by": "210006"
+            }
+        },
+        {
+            "weight": 4,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "PEOPLES BANK LTD INC NBS",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210024",
+                "mnemonic": "NBS",
+                "branch_start": "720000",
+                "branch_end": "729999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "ABSA",
+                "displayName": "ABSA .",
+                "tenantId": "ABSAZAJJ",
+                "bicFi": "ABSAZAJJ",
+                "swiftCode": "ABSAZAJJ",
+                "memberNo": "210016",
+                "mnemonic": "UBK",
+                "branch_start": "300000",
+                "branch_end": "349999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "ABSA",
+                "displayName": "ABSA .",
+                "tenantId": "ABSAZAJJ",
+                "bicFi": "ABSAZAJJ",
+                "swiftCode": "ABSAZAJJ",
+                "memberNo": "210016",
+                "mnemonic": "UBK",
+                "branch_start": "420000",
+                "branch_end": "429999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 5,
+            "value": {
+                "memberName": "ABSA",
+                "displayName": "ABSA .",
+                "tenantId": "ABSAZAJJ",
+                "bicFi": "ABSAZAJJ",
+                "swiftCode": "ABSAZAJJ",
+                "memberNo": "210016",
+                "mnemonic": "UBK",
+                "branch_start": "500000",
+                "branch_end": "569999",
+                "sponsored_by": "210016"
+            }
+        },
+        {
+            "weight": 6,
+            "value": {
+                "memberName": "Standard Bank",
+                "displayName": "STANDARD BANK OF S.A. LTD.",
+                "tenantId": "SBZAZAJJ",
+                "bicFi": "SBZAZAJJ",
+                "swiftCode": "SBZAZAJJ",
+                "memberNo": "210001",
+                "mnemonic": "STA",
+                "branch_start": "63968",
+                "branch_end": "99999",
+                "sponsored_by": "210001"
+            }
+        },
+        {
+            "weight": 2,
+            "value": {
+                "memberName": "OM Bank",
+                "displayName": "OM BANK LIMITED",
+                "tenantId": "NEDS_MAI",
+                "bicFi": "NEDSZAJJ",
+                "swiftCode": "NEDS_MAI",
+                "memberNo": "210067",
+                "mnemonic": "MAI",
+                "branch_start": "352000",
+                "branch_end": "352999",
+                "sponsored_by": "210002"
+            }
+        },
+        {
+            "weight": 4,
+            "value": {
+                "memberName": "Nedbank",
+                "displayName": "UNIBANKLIMITED",
+                "tenantId": "NEDSZAJJ",
+                "bicFi": "",
+                "swiftCode": "NEDSZAJJ",
+                "memberNo": "210028",
+                "mnemonic": "UNI",
+                "branch_start": "790000",
+                "branch_end": "799999",
+                "sponsored_by": "210002"
+            }
+        }
+    ]
+}

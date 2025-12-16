@@ -1,0 +1,231 @@
+
+configs:
+  flink-conf:
+    file: ./conf/config.yaml
+
+  log4j:
+    file: ./conf/log4j.properties
+  log4j-console:
+    file: ./conf/log4j-console.properties
+  log4j-session:
+    file: ./conf/log4j-session.properties
+
+  postgres_conf:
+    file: conf/postgresql.conf
+  postgres_hba:
+    file: conf/pg_hba.conf
+
+services:
+  ################################################################################
+  # begin Flink cluster
+  #
+  # Lots of Jar's added to the base image, Fluss, JDBC, PostgreSQL, Paimon, S3
+  ################################################################################
+  jobmanager:
+    image: ${REPO_NAME}/apacheflink-base-1.20.1-scala_2.12-java17:1.0.0
+    hostname: jobmanager
+    container_name: jobmanager
+    ports:
+      - 8084:8081
+    environment:
+      - ENV_ROOTLOG_LEVEL=DEBUG
+      - ENV_FLINKLOG_LEVEL=INFO
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_DEFAULT_REGION=${AWS_REGION}
+
+      # *** ADD THESE HADOOP S3A VARIABLES AS BACKUP ***
+      - HADOOP_CONF_DIR=/opt/flink/conf           # Ensure core-site.xml is found
+      - fs.s3a.access.key=${MINIO_ROOT_USER}      # Use fs.s3a.access.key
+      - fs.s3a.secret.key=${MINIO_ROOT_PASSWORD}  # Use fs.s3a.secret.key
+      - fs.s3a.endpoint=${MINIO_ENDPOINT}         # Explicitly set the endpoint
+      - fs.s3a.path.style.access=true             # Explicitly set path style access
+    volumes:
+
+      - ./data/flink/logs:/opt/flink/log
+      - ./data/flink/checkpoints:/opt/flink/checkpoints
+      - ./data/flink/rocksdb:/opt/flink/rocksdb
+    configs:
+      - source: flink-conf
+        target: /opt/flink/conf/config.yaml
+      - source: log4j
+        target: /opt/flink/conf/log4j.properties
+      - source: log4j-console
+        target: /opt/flink/conf/log4j-console.properties
+      - source: log4j-session
+        target: /opt/flink/conf/log4j-session.properties
+    command: jobmanager
+
+  taskmanager:
+    image: ${REPO_NAME}/apacheflink-base-1.20.1-scala_2.12-java17:1.0.0
+    depends_on:
+      - jobmanager
+    deploy:
+      replicas: 2
+    environment:
+      - ENV_ROOTLOG_LEVEL=DEBUG
+      - ENV_FLINKLOG_LEVEL=INFO
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_DEFAULT_REGION=${AWS_REGION}
+
+      # *** ADD THESE HADOOP S3A VARIABLES AS BACKUP ***
+      - HADOOP_CONF_DIR=/opt/flink/conf           # Ensure core-site.xml is found
+      - fs.s3a.access.key=${MINIO_ROOT_USER}      # Use fs.s3a.access.key
+      - fs.s3a.secret.key=${MINIO_ROOT_PASSWORD}  # Use fs.s3a.secret.key
+      - fs.s3a.endpoint=${MINIO_ENDPOINT}         # Explicitly set the endpoint
+      - fs.s3a.path.style.access=true             # Explicitly set path style access
+    volumes:
+      - ./data/flink/logs:/opt/flink/log
+      - ./data/flink/checkpoints:/opt/flink/checkpoints
+      - ./data/flink/rocksdb:/opt/flink/rocksdb
+    configs:
+      - source: flink-conf
+        target: /opt/flink/conf/config.yaml
+      - source: log4j
+        target: /opt/flink/conf/log4j.properties
+      - source: log4j-console
+        target: /opt/flink/conf/log4j-console.properties
+      - source: log4j-session
+        target: /opt/flink/conf/log4j-session.properties
+    command: taskmanager
+  ################################################################################
+
+
+  ################################################################################
+  # Will act as a destination store for our JDBC based Flink catalog
+  ################################################################################
+  postgrescat:
+    image: postgres:12
+    hostname: ${POSTGRES_CAT_HOST}
+    container_name: ${POSTGRES_CAT_HOST}
+    restart: unless-stopped
+    ports:
+      - ${POSTGRES_CAT_PORT}:5432
+    environment:
+      - POSTGRES_DB=${POSTGRES_CAT_DB}
+      - POSTGRES_USER=${POSTGRES_CAT_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_CAT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "psql", "-U", "${POSTGRES_CAT_USER}", "${POSTGRES_CAT_DB}"]
+    volumes:
+      - ./data/${POSTGRES_CAT_HOST}:/var/lib/postgresql/data
+      - ./sql/${POSTGRES_CAT_HOST}:/docker-entrypoint-initdb.d
+    configs:
+      - source: postgres_conf
+        target: /etc/postgresql/postgresql.conf
+      - source: postgres_hba
+        target: /etc/postgresql/data/pg_hba.conf
+    command: -c config_file=/etc/postgresql/postgresql.conf
+
+
+  ################################################################################
+  # Will act as a destination store from where we will CDC our data to be embedded
+  ################################################################################
+  postgrescdc:
+    image: postgres:12
+    hostname: ${POSTGRES_CDC_HOST}
+    container_name: ${POSTGRES_CDC_HOST}
+    restart: unless-stopped
+    ports:
+      - ${POSTGRES_CDC_PORT}:5432
+    environment:
+      - POSTGRES_DB=${POSTGRES_CDC_DB}
+      - POSTGRES_USER=${POSTGRES_CDC_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_CDC_PASSWORD}
+    healthcheck:
+      test: ["CMD", "psql", "-U", "${POSTGRES_CDC_USER}", "${POSTGRES_CDC_DB}"]
+    volumes:
+      - ./data/${POSTGRES_CDC_HOST}:/var/lib/postgresql/data
+      - ./sql/${POSTGRES_CDC_HOST}:/docker-entrypoint-initdb.d
+    configs:
+      - source: postgres_conf
+        target: /etc/postgresql/postgresql.conf
+      - source: postgres_hba
+        target: /etc/postgresql/data/pg_hba.conf
+    command: -c config_file=/etc/postgresql/postgresql.conf
+  ################################################################################
+
+
+  ################################################################################
+  # MinIO Object Storage - S3 Compatible Storage
+  ################################################################################  
+  minio:
+    image: quay.io/minio/minio:RELEASE.2024-12-18T13-15-44Z
+    hostname: minio
+    container_name: minio
+    ports:
+      - 9000:9000  # API address   
+      - 9001:9001  # Web UI console
+    environment:  
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}          # access.key: mnadmin
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}  # secret.key: mnpassword
+      - AWS_REGION=${AWS_REGION}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+      - MINIO_DOMAIN=${MINIO_ALIAS}
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_BUCKET=${MINIO_BUCKET}
+    volumes:
+      - ./data/minio:/data    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 5s
+    command: ["server", "/data", "--console-address", ":9001"]
+
+
+  minio-client:
+    image: minio/mc:latest
+    hostname: mc
+    container_name: mc
+    depends_on:
+      minio:
+        condition: 
+          service_healthy    
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+      - MINIO_DOMAIN=${MINIO_ALIAS}
+      - MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      - MINIO_BUCKET=${MINIO_BUCKET}
+    entrypoint: >
+      /bin/sh -c "
+      until (mc alias set ${MINIO_ALIAS} ${MINIO_ENDPOINT} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD}) do echo '...waiting...' && sleep 1; done;
+
+      mc rm -r --force ${MINIO_ALIAS}/${MINIO_BUCKET};  
+
+      mc mb ${MINIO_ALIAS}/${MINIO_BUCKET}/iceberg_jdbc --ignore-existing;
+      mc mb ${MINIO_ALIAS}/${MINIO_BUCKET}/paimon_jdbc --ignore-existing;
+
+      mc policy set public ${MINIO_ALIAS}/${MINIO_BUCKET}/iceberg_jdbc;
+      mc policy set public ${MINIO_ALIAS}/${MINIO_BUCKET}/paimon_jdbc;
+
+      mc anonymous set public ${MINIO_ALIAS}/${MINIO_BUCKET}/iceberg_jdbc;
+      mc anonymous set public ${MINIO_ALIAS}/${MINIO_BUCKET}/paimon_jdbc;
+
+      mc ls ${MINIO_ALIAS};
+
+      echo "MinIO bucket '${MINIO_ALIAS}/${MINIO_BUCKET}' created successfully";
+      tail -f /dev/null
+      "
+
+  ################################################################################
+
+# Without a network explicitly defined, you hit this Hive/Thrift error
+# java.net.URISyntaxException Illegal character in hostname
+# https://github.com/TrivadisPF/platys-modern-data-platform/issues/231
+networks:
+  default:
+    name: ${COMPOSE_PROJECT_NAME}
