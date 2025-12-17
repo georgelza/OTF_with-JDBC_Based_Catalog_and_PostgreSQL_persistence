@@ -1,6 +1,6 @@
 ## Apache Iceberg and apache Paimon Tables feeding Apache Flink with JDBC based Catalog implimentation, back'd by Postgres for persistence
 
-... <ADD>
+Just Decided, want to see whats involved to configure a Unified Catalog, or make that as close as possible, and as close as ossible for me here meant One database `flink_catalog` with 2 schema's (`iceberg_jdbc` and `paimon_jdbc`), interfaced with from Apache Flink using JDBC using the `'catalog-impl' = 'org.apache.iceberg.jdbc.JdbcCatalog'` syntax as part of your catalog create sql, see `<Project Root>/devlab/creFlinkFlows/1.1creCat.sql`
 
 
 ### Now back to our scheduled programming:  ;)
@@ -32,13 +32,13 @@ Now, a phone book, ye I'm old enough to know what thye looked like was useless w
 
 The index in the back was our "reference" of what tables/records are in our book and where to find them. 
 
-And thats what a catalog does for us, it keeps track of our tables, their structures, storage location, access rules, other words, metadata etc.
+And thats what a catalog does for us, it keeps track of our tables, their structures, storage location, access rules, other words, metadata etc. 
 
 All this allows one user to create tables inside a database in one session and makes this available to another user in a different session to access that table and the contents, using the processing engine of choice.
 
 In the past, I use to use [Hive Metastore (HMS)](https://hive.apache.org)/see Central Metastore Catalog. 
 
-But lets see, I like rabit holes so decided to mix things up a bit, or was that I wanted to simplify the stack (HMS is tech heavy), and here we are, lets try and use an JDBC based Catalog with PostgreSQL providing persistence for our Apache Iceberg and apache Paimon Open Table format Lakehouse Tables.
+But lets see, I like rabit holes so decided to mix things up a bit, or was that I wanted to simplify the stack (HMS is tech heavy), and here we are, lets try and use an JDBC based Catalog with PostgreSQL providing persistence for our Apache Iceberg and Apache Paimon Open Table format Lakehouse Tables.
 
 
 BLOG: []()
@@ -52,11 +52,14 @@ GIT REPO: [[Open Table Formats (Apache Iceberg and Apache Paimon) with JDBC base
 
 The stack goes through 3 phases, if we can call it that:
 
-- ...
 
-- Add to this minimul stack our [Apache Flink 1.20.1](https://flink.apache.org) cluster, enabling us to define our catalog, create a Flink database and create tables inside our database homed inside our catalog.
+- [Apache Flink 1.20.1](https://flink.apache.org) cluster, enabling us to define our catalog, create a Flink database and create tables inside our database homed inside our catalog.
 
-- Run our data generation utilizing [Shadowtraffic](https://docs.shadowtraffic.io), providing us with a data stream into a PostgreSQL datastore, which we will CDC source and move around.
+- PostgreSQL Database for persistent store for the JDBC based catalogs.
+  
+- MinIO for object storage of our Apache Iceberg and Apache Paimon tables.
+
+We will be utilizing [Shadowtraffic](https://docs.shadowtraffic.io) to generate our data, Shadowtraffic as configured via `<Project Root>/shadowtraffic/conf/config.json` will be creating 2 dat artifacts, accountHolders and Transactions, these willbe inserted into a PostgreSQL datastore, from whee will will utilize Apache Flink CDC to consume the data into Apache Flink.
 
 
 ## Building and Running the environment
@@ -91,29 +94,32 @@ or
 -  `make pull`
 -  `make build`
 
-At this point we can startup the minimum environment to make sure our Postgres and MinIO is working, or the full stack which adds the Apache Flink cluster.
+
+At this point we can startup the minimum environment to make sure our **Postgres datastores are running** as well as our **MinIO** object store.
 
 
 ## Run the Stack
 
-1. Minimal Environment (Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose.yml`
 
-   - `make run_base`
+1. Full Environment (Flink, Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose.yml`
 
-   - ... look around
-
-   - `make down`
-  
-
-2. Full Environment (Flink, Postgres and MinIO), which will use `<Project Root>/devlab/docker-compose.yml`
+   - cd `<Project Root>/devlab`
 
    - `make run`
 
-   - ... run shadowtraffic, 
+   - cd `<Project Root>/shadowtraffic` 
 
-   - Execute Flink SQL to move the data from the CDC source tables into our Apache Iceberg tables configured with persistent storage on our MinIO object storage service, aka S3 service.
+   - run shadowtraffic by executing `run_pg.sh`
 
-   - Execute Flink SQL to move the data from the CDC source tables into our Apache Paimon tables configured with persistent storage on our MinIO object storage service, aka S3 service.
+   - cd `<Project Root>/devlab`.
+
+   - Create our catalogs and tables by executing the SQL contained in `<Project Root>/devlab/creFlinkFlows`
+     - 1.1.creCat.sql
+     - 2.1.creCdc.sql
+     - 3.1.creTarget.sql
+
+At this point you have a stream of data, source by Apache Flink CDC stack, you have 2 catalogs, based on Apache Iceberg and Apache Paimon, cataloged using JDBC interface, with PostgreSQL for persistence and a S3 based object store backing the Lakehouse tables created.
+
 
    - `make down`
 
@@ -142,14 +148,10 @@ The following stack is deployed using one of the provided  `<Project Root>/devla
 
 
 - [Apache Flink 1.20.1](https://flink.apache.org)                   
-
-    - There is a option to use apache Flink 1.20.2, see `infrastructure/README.md`
   
-- [Apache Flink CDC 3.5](https://nightlies.apache.org/flink/flink-cdc-docs-release-3.5/)
+- [Apache Flink CDC 3.5.0](https://nightlies.apache.org/flink/flink-cdc-docs-release-3.5/)
 
 - [Apache Iceberg 1.9.1](https://iceberg.apache.org)
-
-    - There is a option to use apache Iceberg 1.9.2, see `infrastructure/README.md`
 
 - [Apache Paimon 1.3.1](https://paimon.apache.orc)
 
@@ -161,8 +163,16 @@ The following stack is deployed using one of the provided  `<Project Root>/devla
 
 
 ## By: George Leonard
+
 - georgelza@gmail.com
 - https://www.linkedin.com/in/george-leonard-945b502/
 - https://medium.com/@georgelza
 
 
+## Appendix
+
+### References / Additional Reading
+
+- [Writing to Apache Iceberg on S3 Using Flink SQL with Glue catalog](https://rmoff.net/2025/06/24/writing-to-apache-iceberg-on-s3-using-flink-sql-with-glue-catalog/#_jar_location)
+    
+- And as always, always good to go have a look at his examples, definitely assisted me, [Robbin Moffat Examples](https://github.com/rmoff/examples/tree/main)
