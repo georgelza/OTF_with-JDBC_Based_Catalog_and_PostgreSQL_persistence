@@ -30,3 +30,4 @@ devlab/data/
 devlab/flink/stage/
 infrastructure/flink/stage
 shadowtraffic/conf/license.env
+infrastructurebck/

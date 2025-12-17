@@ -60,8 +60,7 @@ paimon:
 
 iceberg:
 	cd stage; wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-flink-runtime-1.20/1.9.1/iceberg-flink-runtime-1.20-1.9.1.jar \
-	cd stage; wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-flink-1.20/1.9.1/iceberg-flink-1.20-1.9.1.jar \
-	cd stage; wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/1.9.1/iceberg-aws-bundle-1.9.1.jar
+	cd stage; wget https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-flink-1.20/1.9.1/iceberg-flink-1.20-1.9.1.jar
 
 misc:
 	cd stage; wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/3.3.4/hadoop-auth-3.3.4.jar \
