@@ -1,7 +1,7 @@
-## Apache Iceberg and apache Paimon Tables feeding Apache Flink with JDBC based Catalog implimentation, back'd by Postgres for persistence
+## Apache Iceberg and Apache Paimon Tables Apache Flink with JDBC based Catalog implimentation, back'd by Postgres for persistence
 
 
-Just Decided, want to see whats involved to configure a Unified Catalog, or make that as close as possible, and as close as ossible for me here meant One database `flink_catalog` with 2 schema's (`iceberg_jdbc` and `paimon_jdbc`), interfaced with from Apache Flink using JDBC using the `'catalog-impl' = 'org.apache.iceberg.jdbc.JdbcCatalog'` syntax as part of your catalog create sql, see `<Project Root>/devlab/creFlinkFlows/1.1creCat.sql`
+Just Decided, want to see whats involved to configure a Unified Catalog, or make that as close as possible, and as close as possible for me here meant One database `flink_catalog` with 2 schema's (`iceberg_jdbc` and `paimon_jdbc`), interfaced with from Apache Flink using JDBC using the `'catalog-impl' = 'org.apache.iceberg.jdbc.JdbcCatalog'` syntax as part of your catalog create sql, see `<Project Root>/devlab/creFlinkFlows/1.1creCat.sql`
 
 
 ### Now back to our scheduled programming:  ;)
