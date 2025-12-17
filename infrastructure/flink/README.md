@@ -13,10 +13,6 @@ You will notice in the Dockerfile I don't like to hard code versions. Once we ge
 - PostgreSQL Connetor 42.7.6
 - Hadoop S3 Libraries 2.8.3 
 
-  - `make pull`
-  - `make build`
-
-
 ### 2. Container tag:
 
 - Modify the IMAGE_NAME at the top of the Makefile
@@ -36,3 +32,9 @@ You will notice in the Dockerfile I don't like to hard code versions. Once we ge
 
   - image: apacheflink-base-1.20.2-scala_2.12-java17
 
+
+### 3. Building New Apache Flink Container
+
+- `make pull`
+
+- `make build`
