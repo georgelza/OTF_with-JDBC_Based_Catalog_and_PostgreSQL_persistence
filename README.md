@@ -42,9 +42,10 @@ In the past, I use to use [Hive Metastore (HMS)](https://hive.apache.org)/see Ce
 But lets see, I like rabit holes so decided to mix things up a bit, or was that I wanted to simplify the stack (HMS is tech heavy), and here we are, lets try and use an JDBC based Catalog with PostgreSQL providing persistence for our Apache Iceberg and Apache Paimon Open Table format Lakehouse Tables.
 
 
-BLOG: []()
+BLOG: [Apache Iceberg and Apache Paimon utilizing JDBC based Catalog with PostgreSQL for Persistence.](https://medium.com/@georgelza/apache-iceberg-and-apache-paimon-utilizing-jdbc-based-catalog-with-postgresql-for-persistence-8008ace4d794)
 
-GIT REPO: [[Open Table Formats (Apache Iceberg and Apache Paimon) with JDBC based Catalog backed by PostgreSQL for Persistence](https://github.com/georgelza/OTF_with-JDBC_Based_Catalog_and_PostgreSQL_persistence.git)
+
+GIT REPO: [Open Table Formats (Apache Iceberg and Apache Paimon) with JDBC based Catalog backed by PostgreSQL for Persistence](https://github.com/georgelza/OTF_with-JDBC_Based_Catalog_and_PostgreSQL_persistence.git)
 
 
 ## About our Stack:

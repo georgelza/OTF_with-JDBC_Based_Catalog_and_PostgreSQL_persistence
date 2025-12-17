@@ -8,7 +8,7 @@ CREATE CATALOG c_cdcsource WITH
 
 CREATE DATABASE IF NOT EXISTS c_cdcsource.demog;  
 
--- Paimon based Catalog stored inside PostgreSQL database using JDBC interface
+-- Apache Iceberg based Catalog stored inside PostgreSQL database using JDBC interface
 -------------------------------------------------------------------------------------------------------------------------
 -- server: postgrescat
 -- db: flink_catalog
